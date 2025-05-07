@@ -28,6 +28,14 @@ class _MyAppState extends State<MyApp> {
               child: Text("ReadMe"),
             ),
           ),
+          body: Center(
+            child: Column(
+              children: [
+                Text("coucou"),
+                Text("hello"),
+              ],
+            ),
+          ),
           bottomNavigationBar: NavigationBar(
             destinations: [
               NavigationDestination(icon: Icon(Icons.book), label: 'Books'),
