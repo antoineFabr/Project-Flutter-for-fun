@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:namer_app/data/notifiers.dart';
+import 'package:namer_app/views/widget_tree.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,42 +14,23 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int selectedIndex = 1;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.teal,
-          brightness: Brightness.dark,
-        )),
-        home: Scaffold(
-          appBar: AppBar(
-            title: Center(
-              child: Text("ReadMe"),
+    return ValueListenableBuilder(
+      valueListenable: isDarkModeNotifier, 
+      builder: (context, isDarkMode, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.teal,
+                brightness: isDarkMode ? Brightness.dark : Brightness.light,
+              ),
             ),
-          ),
-          body: Center(
-            child: Column(
-              children: [
-                Text("coucou"),
-                Text("hello"),
-              ],
-            ),
-          ),
-          bottomNavigationBar: NavigationBar(
-            destinations: [
-              NavigationDestination(icon: Icon(Icons.book), label: 'Books'),
-              NavigationDestination(icon: Icon(Icons.home), label: 'home')
-            ],
-            onDestinationSelected: (int value) {
-              setState(() {
-                selectedIndex = value;
-              });
-            },
-            selectedIndex: selectedIndex,
-          ),
-        ));
+          home: WidgetTree(),
+        );
+      },
+    );
   }
 }
