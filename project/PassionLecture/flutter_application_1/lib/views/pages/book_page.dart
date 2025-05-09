@@ -41,9 +41,11 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ],
               onChanged: (String? value) {
-                setState(() {
-                  menuItem = value;
-                });
+                setState(
+                  () {
+                    menuItem = value;
+                  },
+                );
               },
             ),
             TextField(
