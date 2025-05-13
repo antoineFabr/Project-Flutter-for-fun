@@ -14,32 +14,47 @@ class _LivreDetailState extends State<LivreDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Center(
-            child: Text("Detail's Book of ${widget.livre.titre}"),
-          ),
+      appBar: AppBar(
+        title: Center(
+          child: Text("Detail's Book of ${widget.livre.titre}"),
         ),
-        body: Center(
-          child: Column(
-            children: [
-              Container(
-                width: 300,
-                height: 100,
-                decoration: BoxDecoration(
-                  color: Colors.teal[800],
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Center(
-                  child: Text(
-                    widget.livre.titre,
-                    style: TextStyle(
-                      fontSize: 26,
-                    ),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            Container(
+              width: 300,
+              height: 100,
+              decoration: BoxDecoration(
+                color: Colors.teal[800],
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Center(
+                child: Text(
+                  widget.livre.titre,
+                  style: TextStyle(
+                    fontSize: 26,
                   ),
                 ),
-              )
-            ],
-          ),
-        ));
+              ),
+            ),
+            InkWell(
+              splashColor: Colors.black,
+              onTap: () {
+                print("Liree");
+              },
+              child: Container(
+                height: 100,
+                width: 150,
+                decoration: BoxDecoration(
+                  color: Colors.white12,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
