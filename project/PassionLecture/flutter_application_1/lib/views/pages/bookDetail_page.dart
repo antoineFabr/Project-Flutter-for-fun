@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:namer_app/data/notifiers.dart';
+import 'package:namer_app/views/pages/reading_page.dart';
 
 class LivreDetail extends StatefulWidget {
   final Livre livre;
@@ -42,6 +43,14 @@ class _LivreDetailState extends State<LivreDetail> {
               splashColor: Colors.black,
               onTap: () {
                 print("Liree");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return LivreEpub(widget.livre);
+                    },
+                  ),
+                );
               },
               child: Container(
                 height: 100,

@@ -7,8 +7,8 @@ class Livre {
   final int id;
   final String titre;
   final int anneeEdition;
-  final String ecrivainNom;
-  final String ecrivainPrenom;
+  final String? ecrivainNom;
+  final String? ecrivainPrenom;
   final String categorieNom;
   final String editeurNom;
   final double? moyenneAppreciation;
@@ -17,8 +17,8 @@ class Livre {
     required this.id,
     required this.titre,
     required this.anneeEdition,
-    required this.ecrivainNom,
-    required this.ecrivainPrenom,
+    this.ecrivainNom,
+    this.ecrivainPrenom,
     required this.categorieNom,
     required this.editeurNom,
     this.moyenneAppreciation,

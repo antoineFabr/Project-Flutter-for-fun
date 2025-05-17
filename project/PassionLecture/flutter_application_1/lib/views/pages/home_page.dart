@@ -25,18 +25,22 @@ class _HomePageState extends State<HomePage> {
       future: futureLivres,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
+          print('snapshot.data = ${snapshot.data}');
           return const Center(
             child: CircularProgressIndicator(),
           );
         } else if (snapshot.hasError) {
+          print('snapshot.data = ${snapshot.data}');
           return Center(
             child: Text('Erreur ${snapshot.error}'),
           );
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+        } else if (snapshot.data == null || snapshot.data!.isEmpty) {
+          print('snapshot.data = ${snapshot.data}');
           return const Center(
             child: Text('Aucun livre dispo'),
           );
         } else {
+          print('snapshot.data = ${snapshot.data}');
           List<Livre> livres = snapshot.data!;
           return Column(
             children: [
@@ -68,37 +72,41 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
-              ListView.builder(
-                itemCount: livres.length,
-                itemBuilder: (context, index) {
-                  final livre = livres[index];
-                  return InkWell(
-                    splashColor: Colors.teal,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return LivreDetail(livre);
-                          },
+              Expanded(
+                child: ListView.builder(
+                  itemCount: livres.length,
+                  itemBuilder: (context, index) {
+                    final livre = livres[index];
+                    return InkWell(
+                      splashColor: Colors.teal,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return LivreDetail(livre);
+                            },
+                          ),
+                        );
+                      },
+                      child: ListTile(
+                        title: Text(livre.titre),
+                        subtitle: Text(
+                          '${livre.ecrivainPrenom ?? ''} ${livre.ecrivainNom ?? ''}',
                         ),
-                      );
-                    },
-                    child: ListTile(
-                      title: Text(livre.titre),
-                      subtitle:
-                          Text('${livre.ecrivainPrenom} ${livre.ecrivainNom}'),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(livre.moyenneAppreciation?.toStringAsFixed(2) ??
-                              'N/A'),
-                          Icon(Icons.arrow_right),
-                        ],
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                                livre.moyenneAppreciation?.toStringAsFixed(2) ??
+                                    'N/A'),
+                            Icon(Icons.arrow_right),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ],
           );
